@@ -1,0 +1,99 @@
+## =====================================================
+##  prueba_fuego.halo
+##  PRUEBA DE FUEGO: 3 niveles de anidamiento
+##  Demuestra que el compilador siempre elige el
+##  valor correcto gracias al shadowing por niveles.
+## =====================================================
+
+## ─── NIVEL 0: Global ───────────────────────────────
+halo escudo vida   <- 100;
+halo escudo nivel  <- 0;
+
+transmitir "╔══════════════════════════════╗";
+transmitir "   PRUEBA DE FUEGO - HALO      ";
+transmitir "╚══════════════════════════════╝";
+
+transmitir "--- NIVEL 0 (Global) ---";
+transmitir vida;      ## debe imprimir 100
+
+## ─── NIVEL 1: Bloque anidado ───────────────────────
+{
+    halo escudo vida  <- 50;   ## sombrea global vida=100
+    halo escudo nivel <- 1;
+
+    transmitir "--- NIVEL 1 (vida sombrea global) ---";
+    transmitir vida;           ## debe imprimir 50
+
+    ## ─── NIVEL 2: Bloque dentro de bloque ──────────
+    {
+        halo escudo vida  <- 25;   ## sombrea nivel-1 vida=50
+        halo escudo nivel <- 2;
+        halo energia precision <- 9.99;
+
+        transmitir "--- NIVEL 2 (vida sombrea nivel 1) ---";
+        transmitir vida;           ## debe imprimir 25
+        transmitir nivel;          ## debe imprimir 2
+
+        ## ─── NIVEL 3: Bloque más profundo ──────────
+        {
+            halo escudo vida   <- 1;  ## sombrea nivel-2 vida=25
+            halo escudo nivel  <- 3;
+            halo mision rango  <- "Spartan-117";
+
+            transmitir "--- NIVEL 3 (vida sombrea nivel 2) ---";
+            transmitir vida;          ## debe imprimir 1
+            transmitir nivel;         ## debe imprimir 3
+            transmitir rango;
+
+            ## Aritmética usando la vida del nivel 3
+            halo escudo dano <- vida + 9;
+            transmitir dano;          ## debe imprimir 10
+        }
+        ## 'rango' ya no existe (murió con el bloque nivel 3)
+        ## 'vida' vuelve a ser 25 (nivel 2)
+        transmitir "--- De regreso en NIVEL 2 ---";
+        transmitir vida;              ## debe imprimir 25
+        transmitir precision;         ## debe imprimir 9.990000
+    }
+    ## 'precision' ya no existe (murió con el bloque nivel 2)
+    ## 'vida' vuelve a ser 50 (nivel 1)
+    transmitir "--- De regreso en NIVEL 1 ---";
+    transmitir vida;                  ## debe imprimir 50
+}
+## 'vida' global = 100 sigue intacta
+transmitir "--- De regreso en NIVEL 0 (Global) ---";
+transmitir vida;                      ## debe imprimir 100
+
+## ─── CONDICIONALES ────────────────────────────────
+transmitir "--- Condicionales ---";
+si (vida > 50) {
+    transmitir "Spartan tiene vida alta";
+} sino {
+    transmitir "Spartan necesita escudo";
+}
+
+## ─── BUCLE MIENTRAS ───────────────────────────────
+transmitir "--- Cuenta regresiva ---";
+halo escudo cuenta <- 3;
+mientras (cuenta > 0) {
+    transmitir cuenta;
+    cuenta <- cuenta - 1;
+}
+transmitir "Despegue!";
+
+## ─── FUNCIONES CON ÁMBITO PROPIO ─────────────────
+mision_inicio mostrar_estado {
+    ## 'vida' aqui busca en ambito de funcion primero,
+    ## sube al global: encuentra vida=100
+    halo mision estado <- "Operativo";
+    transmitir "--- Estado Spartan (dentro de funcion) ---";
+    transmitir vida;          ## ve la global: 100
+    transmitir estado;
+}
+
+transmitir "--- Llamada a funcion ---";
+activar mostrar_estado;
+
+## 'estado' no existe aquí (ambito de funcion cerrado)
+transmitir "--- Fin de la Prueba de Fuego ---";
+transmitir vida;              ## global sigue siendo 100

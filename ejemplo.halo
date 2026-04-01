@@ -1,0 +1,50 @@
+## =============================================
+##  ejemplo.halo  –  ejemplo básico del lenguaje
+## =============================================
+
+## --- Tipos de datos ---
+halo escudo vida           <- 100;
+halo energia escudo_energia <- 75.5;
+halo spartan rango          <- 'S';
+halo mision nombre          <- "Master Chief";
+halo covenant activo_estado <- activo;
+
+## --- Transmisión en pantalla ---
+transmitir "=== Datos del Spartan ===";
+transmitir nombre;
+transmitir vida;
+transmitir escudo_energia;
+transmitir rango;
+transmitir activo_estado;
+
+## --- Expresiones aritméticas ---
+halo escudo balas    <- 30 + 12;
+halo escudo dano     <- (50 - 10) * 2;
+halo energia precision <- 95.0 / 4;
+
+transmitir "=== Estadísticas de combate ===";
+transmitir balas;
+transmitir dano;
+transmitir precision;
+
+## --- Condicional ---
+si (vida > 50) {
+    transmitir "Spartan en condicion optima";
+} sino {
+    transmitir "Spartan necesita refuerzos";
+}
+
+## --- Bucle ---
+halo escudo rondas <- 3;
+mientras (rondas > 0) {
+    transmitir rondas;
+    rondas <- rondas - 1;
+}
+
+## --- Función ---
+mision_inicio saludar {
+    halo mision msg <- "Iniciando protocolo Spartan";
+    transmitir msg;
+}
+
+activar saludar;
