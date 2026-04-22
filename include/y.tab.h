@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
+#ifndef YY_YY_SRC_Y_TAB_H_INCLUDED
+# define YY_YY_SRC_Y_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -45,11 +45,11 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 17 "parser.y"
+#line 15 "src/parser.y"
 
-    #include "ast.h"
+    #include "../include/ast.h"
 
-#line 53 "y.tab.h"
+#line 53 "src/y.tab.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -151,7 +151,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "parser.y"
+#line 19 "src/parser.y"
 
     int       i_val;
     int       b_val;
@@ -159,9 +159,9 @@ union YYSTYPE
     char      c_val;
     char     *s_val;
     int       type_enum;
-    ASTNode  *node;  /* Ahora el compilador ya sabrá qué es ASTNode */
+    struct ASTNode  *node;
 
-#line 165 "y.tab.h"
+#line 165 "src/y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -176,4 +176,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_YY_SRC_Y_TAB_H_INCLUDED  */

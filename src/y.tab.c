@@ -67,14 +67,13 @@
 
 
 /* First part of user prologue.  */
-#line 1 "parser.y"
+#line 1 "src/parser.y"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "symbols.h"
-/* El include de ast.h se queda aquí para el .c */
-#include "ast.h"
+#include "../include/symbols.h"
+#include "../include/ast.h"
 
 int  yylex(void);
 void yyerror(const char *s);
@@ -82,7 +81,7 @@ extern FILE *yyin;
 
 ASTNode *ast_root = NULL;
 
-#line 86 "y.tab.c"
+#line 85 "src/y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -105,150 +104,7 @@ ASTNode *ast_root = NULL;
 #  endif
 # endif
 
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-/* "%code requires" blocks.  */
-#line 17 "parser.y"
-
-    #include "ast.h"
-
-#line 125 "y.tab.c"
-
-/* Token kinds.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    HALO = 258,                    /* HALO  */
-    TRANSMITIR = 259,              /* TRANSMITIR  */
-    SI = 260,                      /* SI  */
-    SINO = 261,                    /* SINO  */
-    MIENTRAS = 262,                /* MIENTRAS  */
-    FUNC_DEF = 263,                /* FUNC_DEF  */
-    FUNC_CALL = 264,               /* FUNC_CALL  */
-    RETORNAR = 265,                /* RETORNAR  */
-    INT_TYPE = 266,                /* INT_TYPE  */
-    CHAR_TYPE = 267,               /* CHAR_TYPE  */
-    DOUBLE_TYPE = 268,             /* DOUBLE_TYPE  */
-    BOOL_TYPE = 269,               /* BOOL_TYPE  */
-    STRING_TYPE = 270,             /* STRING_TYPE  */
-    SEMICOLON = 271,               /* SEMICOLON  */
-    ASSIGN = 272,                  /* ASSIGN  */
-    LPARENT = 273,                 /* LPARENT  */
-    RPARENT = 274,                 /* RPARENT  */
-    LBRACE = 275,                  /* LBRACE  */
-    RBRACE = 276,                  /* RBRACE  */
-    PLUS = 277,                    /* PLUS  */
-    SUB = 278,                     /* SUB  */
-    MULT = 279,                    /* MULT  */
-    DIV = 280,                     /* DIV  */
-    EQ = 281,                      /* EQ  */
-    NEQ = 282,                     /* NEQ  */
-    LT = 283,                      /* LT  */
-    GT = 284,                      /* GT  */
-    LEQ = 285,                     /* LEQ  */
-    GEQ = 286,                     /* GEQ  */
-    AND = 287,                     /* AND  */
-    OR = 288,                      /* OR  */
-    NOT = 289,                     /* NOT  */
-    IDENTIFIER = 290,              /* IDENTIFIER  */
-    INT_LITERAL = 291,             /* INT_LITERAL  */
-    DOUBLE_LITERAL = 292,          /* DOUBLE_LITERAL  */
-    CHAR_LITERAL = 293,            /* CHAR_LITERAL  */
-    BOOL_LITERAL = 294,            /* BOOL_LITERAL  */
-    STRING_LITERAL = 295,          /* STRING_LITERAL  */
-    UMINUS = 296                   /* UMINUS  */
-  };
-  typedef enum yytokentype yytoken_kind_t;
-#endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define HALO 258
-#define TRANSMITIR 259
-#define SI 260
-#define SINO 261
-#define MIENTRAS 262
-#define FUNC_DEF 263
-#define FUNC_CALL 264
-#define RETORNAR 265
-#define INT_TYPE 266
-#define CHAR_TYPE 267
-#define DOUBLE_TYPE 268
-#define BOOL_TYPE 269
-#define STRING_TYPE 270
-#define SEMICOLON 271
-#define ASSIGN 272
-#define LPARENT 273
-#define RPARENT 274
-#define LBRACE 275
-#define RBRACE 276
-#define PLUS 277
-#define SUB 278
-#define MULT 279
-#define DIV 280
-#define EQ 281
-#define NEQ 282
-#define LT 283
-#define GT 284
-#define LEQ 285
-#define GEQ 286
-#define AND 287
-#define OR 288
-#define NOT 289
-#define IDENTIFIER 290
-#define INT_LITERAL 291
-#define DOUBLE_LITERAL 292
-#define CHAR_LITERAL 293
-#define BOOL_LITERAL 294
-#define STRING_LITERAL 295
-#define UMINUS 296
-
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 24 "parser.y"
-
-    int       i_val;
-    int       b_val;
-    double    d_val;
-    char      c_val;
-    char     *s_val;
-    int       type_enum;
-    ASTNode  *node;  /* Ahora el compilador ya sabrá qué es ASTNode */
-
-#line 237 "y.tab.c"
-
-};
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
-#endif
-
-
-extern YYSTYPE yylval;
-
-
-int yyparse (void);
-
-
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#include "y.tab.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -699,11 +555,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    80,    80,    84,    85,    89,    93,    94,    95,    96,
-      97,    98,    99,   100,   101,   105,   106,   107,   108,   109,
-     113,   114,   115,   116,   117,   118,   119,   120,   121,   122,
-     123,   124,   125,   126,   127,   128,   129,   130,   131,   132,
-     133,   137,   144,   151,   155,   156,   160,   164,   171,   178
+       0,    72,    72,    76,    77,    81,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,    97,    98,    99,   100,   101,
+     105,   106,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   120,   121,   122,   123,   124,
+     125,   129,   136,   143,   147,   148,   152,   156,   163,   170
 };
 #endif
 
@@ -1340,307 +1196,307 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* programa: lista_sentencias  */
-#line 80 "parser.y"
+#line 72 "src/parser.y"
                             { ast_root = (yyvsp[0].node); }
-#line 1346 "y.tab.c"
+#line 1202 "src/y.tab.c"
     break;
 
   case 3: /* lista_sentencias: lista_sentencias sentencia  */
-#line 84 "parser.y"
+#line 76 "src/parser.y"
                                 { (yyval.node) = ((yyvsp[-1].node) || (yyvsp[0].node)) ? ast_make_seq((yyvsp[-1].node), (yyvsp[0].node)) : NULL; }
-#line 1352 "y.tab.c"
+#line 1208 "src/y.tab.c"
     break;
 
   case 4: /* lista_sentencias: %empty  */
-#line 85 "parser.y"
+#line 77 "src/parser.y"
                                  { (yyval.node) = NULL; }
-#line 1358 "y.tab.c"
+#line 1214 "src/y.tab.c"
     break;
 
   case 5: /* bloque: LBRACE lista_sentencias RBRACE  */
-#line 89 "parser.y"
+#line 81 "src/parser.y"
                                     { (yyval.node) = ast_make_block((yyvsp[-1].node)); }
-#line 1364 "y.tab.c"
+#line 1220 "src/y.tab.c"
     break;
 
   case 6: /* sentencia: definicion_variable SEMICOLON  */
-#line 93 "parser.y"
+#line 85 "src/parser.y"
                                     { (yyval.node) = (yyvsp[-1].node); }
-#line 1370 "y.tab.c"
+#line 1226 "src/y.tab.c"
     break;
 
   case 7: /* sentencia: asignacion SEMICOLON  */
-#line 94 "parser.y"
+#line 86 "src/parser.y"
                                     { (yyval.node) = (yyvsp[-1].node); }
-#line 1376 "y.tab.c"
+#line 1232 "src/y.tab.c"
     break;
 
   case 8: /* sentencia: sentencia_transmitir SEMICOLON  */
-#line 95 "parser.y"
+#line 87 "src/parser.y"
                                      { (yyval.node) = (yyvsp[-1].node); }
-#line 1382 "y.tab.c"
+#line 1238 "src/y.tab.c"
     break;
 
   case 9: /* sentencia: sentencia_si  */
-#line 96 "parser.y"
+#line 88 "src/parser.y"
                                     { (yyval.node) = (yyvsp[0].node); }
-#line 1388 "y.tab.c"
+#line 1244 "src/y.tab.c"
     break;
 
   case 10: /* sentencia: sentencia_mientras  */
-#line 97 "parser.y"
+#line 89 "src/parser.y"
                                     { (yyval.node) = (yyvsp[0].node); }
-#line 1394 "y.tab.c"
+#line 1250 "src/y.tab.c"
     break;
 
   case 11: /* sentencia: definicion_funcion  */
-#line 98 "parser.y"
+#line 90 "src/parser.y"
                                     { (yyval.node) = (yyvsp[0].node); }
-#line 1400 "y.tab.c"
+#line 1256 "src/y.tab.c"
     break;
 
   case 12: /* sentencia: llamada_funcion SEMICOLON  */
-#line 99 "parser.y"
+#line 91 "src/parser.y"
                                     { (yyval.node) = (yyvsp[-1].node); }
-#line 1406 "y.tab.c"
+#line 1262 "src/y.tab.c"
     break;
 
   case 13: /* sentencia: sentencia_retornar SEMICOLON  */
-#line 100 "parser.y"
+#line 92 "src/parser.y"
                                     { (yyval.node) = (yyvsp[-1].node); }
-#line 1412 "y.tab.c"
+#line 1268 "src/y.tab.c"
     break;
 
   case 14: /* sentencia: bloque  */
-#line 101 "parser.y"
+#line 93 "src/parser.y"
                                     { (yyval.node) = (yyvsp[0].node); }
-#line 1418 "y.tab.c"
+#line 1274 "src/y.tab.c"
     break;
 
   case 15: /* tipo_dato: INT_TYPE  */
-#line 105 "parser.y"
+#line 97 "src/parser.y"
                   { (yyval.type_enum) = TYPE_ESCUDO; }
-#line 1424 "y.tab.c"
+#line 1280 "src/y.tab.c"
     break;
 
   case 16: /* tipo_dato: DOUBLE_TYPE  */
-#line 106 "parser.y"
+#line 98 "src/parser.y"
                   { (yyval.type_enum) = TYPE_ENERGIA; }
-#line 1430 "y.tab.c"
+#line 1286 "src/y.tab.c"
     break;
 
   case 17: /* tipo_dato: CHAR_TYPE  */
-#line 107 "parser.y"
+#line 99 "src/parser.y"
                   { (yyval.type_enum) = TYPE_SPARTAN; }
-#line 1436 "y.tab.c"
+#line 1292 "src/y.tab.c"
     break;
 
   case 18: /* tipo_dato: STRING_TYPE  */
-#line 108 "parser.y"
+#line 100 "src/parser.y"
                   { (yyval.type_enum) = TYPE_MISION; }
-#line 1442 "y.tab.c"
+#line 1298 "src/y.tab.c"
     break;
 
   case 19: /* tipo_dato: BOOL_TYPE  */
-#line 109 "parser.y"
+#line 101 "src/parser.y"
                   { (yyval.type_enum) = TYPE_COVENANT; }
-#line 1448 "y.tab.c"
+#line 1304 "src/y.tab.c"
     break;
 
   case 20: /* expresion: INT_LITERAL  */
-#line 113 "parser.y"
+#line 105 "src/parser.y"
                                          { (yyval.node) = ast_make_int((yyvsp[0].i_val)); }
-#line 1454 "y.tab.c"
+#line 1310 "src/y.tab.c"
     break;
 
   case 21: /* expresion: DOUBLE_LITERAL  */
-#line 114 "parser.y"
+#line 106 "src/parser.y"
                                          { (yyval.node) = ast_make_double((yyvsp[0].d_val)); }
-#line 1460 "y.tab.c"
+#line 1316 "src/y.tab.c"
     break;
 
   case 22: /* expresion: CHAR_LITERAL  */
-#line 115 "parser.y"
+#line 107 "src/parser.y"
                                          { (yyval.node) = ast_make_char((yyvsp[0].c_val)); }
-#line 1466 "y.tab.c"
+#line 1322 "src/y.tab.c"
     break;
 
   case 23: /* expresion: BOOL_LITERAL  */
-#line 116 "parser.y"
+#line 108 "src/parser.y"
                                          { (yyval.node) = ast_make_bool((yyvsp[0].b_val)); }
-#line 1472 "y.tab.c"
+#line 1328 "src/y.tab.c"
     break;
 
   case 24: /* expresion: STRING_LITERAL  */
-#line 117 "parser.y"
+#line 109 "src/parser.y"
                                          { (yyval.node) = ast_make_string((yyvsp[0].s_val)); free((yyvsp[0].s_val)); }
-#line 1478 "y.tab.c"
+#line 1334 "src/y.tab.c"
     break;
 
   case 25: /* expresion: IDENTIFIER  */
-#line 118 "parser.y"
+#line 110 "src/parser.y"
                                          { (yyval.node) = ast_make_id((yyvsp[0].s_val)); free((yyvsp[0].s_val)); }
-#line 1484 "y.tab.c"
+#line 1340 "src/y.tab.c"
     break;
 
   case 26: /* expresion: expresion PLUS expresion  */
-#line 119 "parser.y"
+#line 111 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_ADD, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1490 "y.tab.c"
+#line 1346 "src/y.tab.c"
     break;
 
   case 27: /* expresion: expresion SUB expresion  */
-#line 120 "parser.y"
+#line 112 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_SUB, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1496 "y.tab.c"
+#line 1352 "src/y.tab.c"
     break;
 
   case 28: /* expresion: expresion MULT expresion  */
-#line 121 "parser.y"
+#line 113 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_MUL, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1502 "y.tab.c"
+#line 1358 "src/y.tab.c"
     break;
 
   case 29: /* expresion: expresion DIV expresion  */
-#line 122 "parser.y"
+#line 114 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_DIV, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1508 "y.tab.c"
+#line 1364 "src/y.tab.c"
     break;
 
   case 30: /* expresion: SUB expresion  */
-#line 123 "parser.y"
+#line 115 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_MUL, ast_make_int(-1), (yyvsp[0].node)); }
-#line 1514 "y.tab.c"
+#line 1370 "src/y.tab.c"
     break;
 
   case 31: /* expresion: expresion EQ expresion  */
-#line 124 "parser.y"
+#line 116 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_EQ,  (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1520 "y.tab.c"
+#line 1376 "src/y.tab.c"
     break;
 
   case 32: /* expresion: expresion NEQ expresion  */
-#line 125 "parser.y"
+#line 117 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_NEQ, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1526 "y.tab.c"
+#line 1382 "src/y.tab.c"
     break;
 
   case 33: /* expresion: expresion LT expresion  */
-#line 126 "parser.y"
+#line 118 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_LT,  (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1532 "y.tab.c"
+#line 1388 "src/y.tab.c"
     break;
 
   case 34: /* expresion: expresion GT expresion  */
-#line 127 "parser.y"
+#line 119 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_GT,  (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1538 "y.tab.c"
+#line 1394 "src/y.tab.c"
     break;
 
   case 35: /* expresion: expresion LEQ expresion  */
-#line 128 "parser.y"
+#line 120 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_LEQ, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1544 "y.tab.c"
+#line 1400 "src/y.tab.c"
     break;
 
   case 36: /* expresion: expresion GEQ expresion  */
-#line 129 "parser.y"
+#line 121 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_GEQ, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1550 "y.tab.c"
+#line 1406 "src/y.tab.c"
     break;
 
   case 37: /* expresion: expresion AND expresion  */
-#line 130 "parser.y"
+#line 122 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_AND, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1556 "y.tab.c"
+#line 1412 "src/y.tab.c"
     break;
 
   case 38: /* expresion: expresion OR expresion  */
-#line 131 "parser.y"
+#line 123 "src/parser.y"
                                          { (yyval.node) = ast_make_binop(NODE_OR,  (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1562 "y.tab.c"
+#line 1418 "src/y.tab.c"
     break;
 
   case 39: /* expresion: NOT expresion  */
-#line 132 "parser.y"
+#line 124 "src/parser.y"
                                          { (yyval.node) = ast_make_not((yyvsp[0].node)); }
-#line 1568 "y.tab.c"
+#line 1424 "src/y.tab.c"
     break;
 
   case 40: /* expresion: LPARENT expresion RPARENT  */
-#line 133 "parser.y"
+#line 125 "src/parser.y"
                                          { (yyval.node) = (yyvsp[-1].node); }
-#line 1574 "y.tab.c"
+#line 1430 "src/y.tab.c"
     break;
 
   case 41: /* definicion_variable: HALO tipo_dato IDENTIFIER ASSIGN expresion  */
-#line 137 "parser.y"
+#line 129 "src/parser.y"
                                                {
         (yyval.node) = ast_make_decl((DataType)(yyvsp[-3].type_enum), (yyvsp[-2].s_val), (yyvsp[0].node));
         free((yyvsp[-2].s_val));
     }
-#line 1583 "y.tab.c"
+#line 1439 "src/y.tab.c"
     break;
 
   case 42: /* asignacion: IDENTIFIER ASSIGN expresion  */
-#line 144 "parser.y"
+#line 136 "src/parser.y"
                                 {
         (yyval.node) = ast_make_assign((yyvsp[-2].s_val), (yyvsp[0].node));
         free((yyvsp[-2].s_val));
     }
-#line 1592 "y.tab.c"
+#line 1448 "src/y.tab.c"
     break;
 
   case 43: /* sentencia_transmitir: TRANSMITIR expresion  */
-#line 151 "parser.y"
+#line 143 "src/parser.y"
                          { (yyval.node) = ast_make_transmitir((yyvsp[0].node)); }
-#line 1598 "y.tab.c"
+#line 1454 "src/y.tab.c"
     break;
 
   case 44: /* sentencia_si: SI LPARENT expresion RPARENT bloque  */
-#line 155 "parser.y"
+#line 147 "src/parser.y"
                                         { (yyval.node) = ast_make_if((yyvsp[-2].node), (yyvsp[0].node), NULL); }
-#line 1604 "y.tab.c"
+#line 1460 "src/y.tab.c"
     break;
 
   case 45: /* sentencia_si: SI LPARENT expresion RPARENT bloque SINO bloque  */
-#line 156 "parser.y"
+#line 148 "src/parser.y"
                                                       { (yyval.node) = ast_make_if((yyvsp[-4].node), (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1610 "y.tab.c"
+#line 1466 "src/y.tab.c"
     break;
 
   case 46: /* sentencia_mientras: MIENTRAS LPARENT expresion RPARENT bloque  */
-#line 160 "parser.y"
+#line 152 "src/parser.y"
                                               { (yyval.node) = ast_make_while((yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1616 "y.tab.c"
+#line 1472 "src/y.tab.c"
     break;
 
   case 47: /* definicion_funcion: FUNC_DEF IDENTIFIER bloque  */
-#line 164 "parser.y"
+#line 156 "src/parser.y"
                                {
         (yyval.node) = ast_make_func_def((yyvsp[-1].s_val), (yyvsp[0].node));
         free((yyvsp[-1].s_val));
     }
-#line 1625 "y.tab.c"
+#line 1481 "src/y.tab.c"
     break;
 
   case 48: /* llamada_funcion: FUNC_CALL IDENTIFIER  */
-#line 171 "parser.y"
+#line 163 "src/parser.y"
                          {
         (yyval.node) = ast_make_func_call((yyvsp[0].s_val));
         free((yyvsp[0].s_val));
     }
-#line 1634 "y.tab.c"
+#line 1490 "src/y.tab.c"
     break;
 
   case 49: /* sentencia_retornar: RETORNAR expresion  */
-#line 178 "parser.y"
+#line 170 "src/parser.y"
                        { (yyval.node) = ast_make_return((yyvsp[0].node)); }
-#line 1640 "y.tab.c"
+#line 1496 "src/y.tab.c"
     break;
 
 
-#line 1644 "y.tab.c"
+#line 1500 "src/y.tab.c"
 
       default: break;
     }
@@ -1833,11 +1689,8 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 181 "parser.y"
+#line 173 "src/parser.y"
 
-/* ============================================================
-   CÓDIGO C FINAL (Inicia después del segundo %%)
-   ============================================================ */
 
 void yyerror(const char *s) {
     fprintf(stderr, "Error sintactico: %s\n", s);
@@ -1856,12 +1709,14 @@ int main(int argc, char **argv) {
 
     if (filename) {
         FILE *f = fopen(filename, "r");
-        if (!f) { fprintf(stderr, "No se pudo abrir: %s\n", filename); return 1; }
+        if (!f) { 
+            fprintf(stderr, "No se pudo abrir el archivo: %s\n", filename); 
+            return 1; 
+        }
         yyin = f;
     }
 
     init_symbol_table();
-
     if (yyparse() != 0) return 1;
 
     if (print_ast) {

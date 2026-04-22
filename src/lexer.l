@@ -1,7 +1,9 @@
 %{
-#include "y.tab.h"
-#include "symbols.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include "../include/y.tab.h"
+#include "../include/symbols.h"
 
 void yyerror(const char *s);
 %}
@@ -73,7 +75,6 @@ STRING   \"(\\.|[^"\\])*\"
 }
 
 {STRING} {
-    /* Quitar comillas */
     yylval.s_val = strndup(yytext + 1, strlen(yytext) - 2);
     return STRING_LITERAL;
 }

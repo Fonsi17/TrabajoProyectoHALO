@@ -4,11 +4,15 @@
 #include "symbols.h"
 
 /* ============================================================
- *  TIPOS DE NODOS DEL AST
+ * TIPOS DE NODOS DEL AST
  * ============================================================ */
 typedef enum {
     /* Literales */
-    NODE_INT_LIT, NODE_DOUBLE_LIT, NODE_CHAR_LIT, NODE_BOOL_LIT, NODE_STRING_LIT,
+    NODE_INT_LIT, 
+    NODE_DOUBLE_LIT, 
+    NODE_CHAR_LIT, 
+    NODE_BOOL_LIT, 
+    NODE_STRING_LIT,
 
     /* Identificador */
     NODE_IDENTIFIER,
@@ -36,10 +40,11 @@ typedef enum {
 } NodeType;
 
 /* ============================================================
- *  NODO DEL AST
+ * ESTRUCTURA DEL NODO DEL AST
  * ============================================================ */
 typedef struct ASTNode {
     NodeType  type;
+    DataType  data_type;  /* Tipo de dato según symbols.h */
 
     union {
         int    i_val;
@@ -49,17 +54,16 @@ typedef struct ASTNode {
         char  *s_val;
     } value;
 
-    DataType data_type;   /* para NODE_DECL e identificadores   */
-    char    *name;        /* para ID, funciones, DECL           */
+    char *name;           /* Para nombres de variables o funciones */
 
-    struct ASTNode *left;   /* expr izq / condición / init / body */
-    struct ASTNode *right;  /* expr der / then-branch             */
-    struct ASTNode *extra;  /* else-branch en NODE_IF             */
-    struct ASTNode *next;   /* encadenado (no usado con SEQ)      */
+    struct ASTNode *left;   /* expr izq / condición / body */
+    struct ASTNode *right;  /* expr der / then-branch      */
+    struct ASTNode *extra;  /* else-branch en NODE_IF      */
+    struct ASTNode *next;   /* encadenado de nodos         */
 } ASTNode;
 
 /* ============================================================
- *  API
+ * PROTOTIPOS DE LA API (Constructores)
  * ============================================================ */
 ASTNode* ast_make_int      (int v);
 ASTNode* ast_make_double   (double v);
@@ -80,9 +84,10 @@ ASTNode* ast_make_func_def (char *name, ASTNode *body);
 ASTNode* ast_make_func_call(char *name);
 ASTNode* ast_make_return   (ASTNode *expr);
 
-double   ast_eval (ASTNode *node);
-void     ast_exec (ASTNode *node);
-void     ast_print(ASTNode *node, int indent);
-void     ast_free (ASTNode *node);
+/* Ejecución y Depuración */
+double ast_eval  (ASTNode *node);
+void   ast_exec  (ASTNode *node);
+void   ast_print (ASTNode *node, int indent);
+void   ast_free  (ASTNode *node);
 
-#endif
+#endif /* AST_H */

@@ -5,7 +5,7 @@
 #include "symbols.h"
 
 /* ============================================================
- *  Registro de funciones del usuario
+ * Registro de funciones del usuario
  * ============================================================ */
 #define MAX_FUNCS 256
 
@@ -47,7 +47,7 @@ static ASTNode* find_func(char *name) {
 }
 
 /* ============================================================
- *  Helper: nodo vacío
+ * Helper: nodo vacío
  * ============================================================ */
 static ASTNode* new_node(NodeType t) {
     ASTNode *n = (ASTNode*) calloc(1, sizeof(ASTNode));
@@ -57,7 +57,7 @@ static ASTNode* new_node(NodeType t) {
 }
 
 /* ============================================================
- *  CONSTRUCTORES
+ * CONSTRUCTORES
  * ============================================================ */
 ASTNode* ast_make_int(int v)          { ASTNode *n=new_node(NODE_INT_LIT);    n->value.i_val=v; n->data_type=TYPE_ESCUDO;   return n; }
 ASTNode* ast_make_double(double v)    { ASTNode *n=new_node(NODE_DOUBLE_LIT); n->value.d_val=v; n->data_type=TYPE_ENERGIA;  return n; }
@@ -159,7 +159,7 @@ ASTNode* ast_make_return(ASTNode *expr) {
 }
 
 /* ============================================================
- *  EVALUACIÓN DE EXPRESIONES  → double
+ * EVALUACIÓN DE EXPRESIONES  → double
  * ============================================================ */
 double ast_eval(ASTNode *node) {
     if (!node) return 0.0;
@@ -216,7 +216,7 @@ double ast_eval(ASTNode *node) {
 }
 
 /* ============================================================
- *  EJECUCIÓN DE INSTRUCCIONES
+ * EJECUCIÓN DE INSTRUCCIONES
  * ============================================================ */
 void ast_exec(ASTNode *node) {
     if (!node || g_return_flag) return;
@@ -373,7 +373,7 @@ void ast_exec(ASTNode *node) {
 }
 
 /* ============================================================
- *  IMPRESIÓN DEL ÁRBOL (depuración)
+ * IMPRESIÓN DEL ÁRBOL (depuración)
  * ============================================================ */
 static const char* node_name(NodeType t) {
     switch (t) {
@@ -430,7 +430,7 @@ void ast_print(ASTNode *node, int indent) {
 }
 
 /* ============================================================
- *  LIBERACIÓN DE MEMORIA
+ * LIBERACIÓN DE MEMORIA
  * ============================================================ */
 void ast_free(ASTNode *node) {
     if (!node) return;

@@ -72,9 +72,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "symbols.h"
+#include "../include/symbols.h"
 /* El include de ast.h se queda aquí para el .c */
-#include "ast.h"
+#include "../include/ast.h"
 
 int  yylex(void);
 void yyerror(const char *s);

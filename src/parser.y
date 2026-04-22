@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "symbols.h"
-/* El include de ast.h se queda aquí para el .c */
-#include "ast.h"
+#include "../include/symbols.h"
+#include "../include/ast.h"
 
 int  yylex(void);
 void yyerror(const char *s);
@@ -13,14 +12,10 @@ extern FILE *yyin;
 ASTNode *ast_root = NULL;
 %}
 
-/* ESTE ES EL BLOQUE QUE DEBES AGREGAR */
 %code requires {
-    #include "ast.h"
+    #include "../include/ast.h"
 }
 
-/* ============================================================
- * UNIÓN SEMÁNTICA
- * ============================================================ */
 %union {
     int       i_val;
     int       b_val;
@@ -28,7 +23,7 @@ ASTNode *ast_root = NULL;
     char      c_val;
     char     *s_val;
     int       type_enum;
-    ASTNode  *node;  /* Ahora el compilador ya sabrá qué es ASTNode */
+    struct ASTNode  *node;
 }
 
 /* ============================================================
@@ -63,7 +58,7 @@ ASTNode *ast_root = NULL;
 %right UMINUS
 
 /* ============================================================
-   TIPOS DE NO TERMINALES (Declaraciones)
+   TIPOS DE NO TERMINALES
    ============================================================ */
 %type <type_enum> tipo_dato
 %type <node>      expresion sentencia lista_sentencias bloque programa
@@ -72,9 +67,6 @@ ASTNode *ast_root = NULL;
 %type <node>      llamada_funcion sentencia_retornar
 
 %% 
-/* ============================================================
-   GRAMÁTICA (Inicia después del primer %%)
-   ============================================================ */
 
 programa:
     lista_sentencias        { ast_root = $1; }
@@ -179,9 +171,6 @@ sentencia_retornar:
     ;
 
 %%
-/* ============================================================
-   CÓDIGO C FINAL (Inicia después del segundo %%)
-   ============================================================ */
 
 void yyerror(const char *s) {
     fprintf(stderr, "Error sintactico: %s\n", s);
@@ -200,12 +189,14 @@ int main(int argc, char **argv) {
 
     if (filename) {
         FILE *f = fopen(filename, "r");
-        if (!f) { fprintf(stderr, "No se pudo abrir: %s\n", filename); return 1; }
+        if (!f) { 
+            fprintf(stderr, "No se pudo abrir el archivo: %s\n", filename); 
+            return 1; 
+        }
         yyin = f;
     }
 
     init_symbol_table();
-
     if (yyparse() != 0) return 1;
 
     if (print_ast) {
